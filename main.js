@@ -13,6 +13,7 @@ function createWindow () {
         fullscreenable: true,
         maximizable: false,
         minimizable: true,
+        resizable: false,
         title: "Easy Player",
         transparent: true,
         webPreferences: {

@@ -1,7 +1,7 @@
 # EasyPlayer
 
 Application based on Electron.
-App worker like SPA application.<br>
+App worker like single page application.<br>
 #
 ### TODO
 <li>Local audio files scaner

@@ -1,0 +1,118 @@
+@import "vars"
+@import "fonts"
+@import "libs"
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $accent
+	color: #fff
+
+html
+	border: .001rem solid rgba(0,0,0,.3)
+	overflow-y: hidden
+
+body
+	font-size: 16px
+	min-width: 320px
+	position: relative
+	line-height: 1.65
+	font-family: $default-font
+	overflow-x: hidden
+	color: $text
+	user-select: none
+	border-radius: 5rem
+
+.text-center
+	text-align: center
+
+b, strong
+	font-weight: bold
+
+.content-null
+	content: ""
+
+#root
+	width: 100%
+	height: 100vh
+	min-width: 100vw
+	min-height: 100vh
+	transition: opacity 2s
+
+.controls
+	height: 30px
+	max-height: 30px
+	min-height: 30px
+	width: 100%
+	top: 0
+	right: 0
+	.title-container
+		width: 100%
+		z-index: -1
+		.title
+			font-size: .8em
+			padding: 0 1rem
+			color: $text
+	.control-container
+		.btn
+			color: $text
+			transition: .2s ease-in-out
+			box-shadow: none
+			padding: 0 1rem
+			border-radius: 0
+		.closen
+			&:hover
+				color: #fff
+				background: #ff0035
+		.restore
+			&:hover
+				background: rgba(0,0,0,.1)
+		.minimize
+			&:hover
+				background: rgba(0,0,0,.1)
+
+@keyframes fadeOutOp
+	0%
+		opacity: 1
+	50%
+		opacity: .5
+	100%
+		opacity: 0
+
+@keyframes fadeInOp
+	0%
+		opacity: 0
+	50%
+		opacity: .5
+	100%
+		opacity: 1
+
+@keyframes animLogo
+	from
+		opacity: 1
+	20%
+		opacity: .6
+	50%
+		opacity: 0
+	70%
+		opacity: .6
+	to
+		opacity: 1
+
+.input-icon
+	font-size: 14px
+	margin-right: 5px
+
+.unset
+	display: none
+
+.logo
+	height: 127px
+	width: 251px
+	animation: animLogo 4s infinite
+
+.logo-title
+	text-shadow: 0rem 0rem 6px rgba(0,0,0,.1) !important
+
+@import "media" // Always at the end

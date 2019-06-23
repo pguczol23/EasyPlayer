@@ -1,0 +1,58 @@
+{
+  "name": "optimizedhtml",
+  "version": "4.0.0",
+  "description": "OptimizedHTML 4 - Start HTML Template",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "compile": "babel-compile -p es2015 src:lib test:.test",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out"
+  },
+  "keywords": [
+    "db",
+    "node",
+    "electron"
+  ],
+  "author": "WebDesign Master",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-cli": "^6.26.0",
+    "browser-sync": "^2.26.0",
+    "electron": "^4.0.4",
+    "electron-builder": "^20.38.5",
+    "electron-packager": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^6.0.0",
+    "gulp-clean-css": "^3.10.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-notify": "^3.2.0",
+    "gulp-rename": "^1.4.0",
+    "gulp-rsync": "0.0.8",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.1",
+    "gulp-util": "^3.0.8"
+  },
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "gulp-babel": "^8.0.0",
+    "js-sha256": "^0.9.0",
+    "mysql": "^2.16.0",
+    "prop-types": "latest",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "build": {
+    "appId": "your.id",
+    "win": {
+      "category": "your.app.category.type"
+    }
+  }
+}

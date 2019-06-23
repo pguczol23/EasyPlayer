@@ -1,7 +1,7 @@
 {
-  "name": "optimizedhtml",
+  "name": "easyplayer",
   "version": "4.0.0",
-  "description": "OptimizedHTML 4 - Start HTML Template",
+  "description": "Easy Player",
   "main": "main.js",
   "scripts": {
     "start": "electron .",

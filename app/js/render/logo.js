@@ -5,6 +5,6 @@ $('#current').html(
     '\t\t\t</div>\n'
 );
 setTitle('Loading...');
-removeTitle();
+// removeTitle();
 switchContent();
 $('#render').find('#logo').remove();

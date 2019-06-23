@@ -1,6 +1,7 @@
 /node_modules/
 /dist/
 /.git/
+/css/
 /**/_backstage
 /**/package-lock.json
 /**/Thumbs.db

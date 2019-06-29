@@ -1,6 +1,6 @@
 class Player  {
-    constructor (params) {
-        this.params = params;
+    constructor (parameters) {
+        this.params = parameters;
         this.Init();
     }
 
@@ -71,24 +71,24 @@ class Player  {
         return ret;
     }
 
-    changePlayerTime() {
+    changePlayerTime(val) {
         $(this.params.playedTimeClass).css({
-            width: Math.round(((this.params.audio.currentTime)/this.params.audio.duration ) * $(this.params.musicChanger).width()) + 'px'
+            width: Math.round(((val >= 0 ? val : this.params.audio.currentTime)/this.params.audio.duration ) * $(this.params.musicChanger).width()) + 'px'
         });
     }
 
-    changeVolumeTime() {
+    changeVolumeTime(val) {
         $(this.params.volumeTimeClass).css({
-            width: Math.round(((this.params.audio.volume)/1 ) * $(this.params.volumeChanger).width()) + 'px'
+            width: Math.round(((val >= 0 ? val : this.params.audio.volume )/1 ) * $(this.params.volumeChanger).width()) + 'px'
         });
     }
 
     playTick() {
         if (this.params.hasTickEnable) {
             $(this.params.musicChanger).val(this.params.audio.currentTime);
+            this.changePlayerTime();
         }
         this.changeTimers();
-        this.changePlayerTime();
     }
 
     Init() {
@@ -119,11 +119,19 @@ class Player  {
         $(this.params.volumeChanger).on('change', () => {
             this.changeVolume($(this.params.volumeChanger).val());
         });
+        $(this.params.volumeChanger).on('input', () => {
+            var v = $(this.params.volumeChanger).val();
+            this.changeVolumeTime(v);
+            $(this.params.volumeHint).html($(this.params.volumeChanger).val() * 100);
+        });
         $(this.params.musicChanger).on('change', () => {
             this.changeMusicTime($(this.params.musicChanger).val());
         });
         $(this.params.musicChanger).on('input', () => {
             this.params.hasTickEnable = false;
+            var v = $(this.params.musicChanger).val();
+            this.changePlayerTime(v);
+            $(this.params.playerTimeHint).html(this.timeFormat(v));
         });
         $(this.params.muteChanger).on('click', () => {
             if (this.params.hasMute) {
@@ -133,12 +141,6 @@ class Player  {
         });
     }
 }
-
-let win = require('electron').remote.getCurrentWindow();
-win.setSize(1280, 720);
-win.setResizable(true);
-win.center();
-_CONFIG_.setMaximizeEnabled(true);
 
 var player = new Player({
     PlayBtn: '.play-btn',
@@ -154,4 +156,8 @@ var player = new Player({
     iconVolumeMin: 'fal fa-volume-mute',
     playedTimeClass: '.m-player-cur',
     volumeTimeClass: '.m-volume-cur',
+    volumeHint: '',
+    playerTimeHint: ''
 });
+
+_CONFIG_.lisenList.player = true;

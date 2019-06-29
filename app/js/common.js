@@ -1,3 +1,4 @@
+
 var _CONFIG_ = {
     appName: 'Easy Player',
     maximized: false,
@@ -47,6 +48,15 @@ var _CONFIG_ = {
 
 function renderPage(name) {
     return $('#render').append('<script src="js/render/'+ name +'.js" id="'+ name +'"></script>');
+}
+
+function reRenderPage(name, target) {
+    $('#render').find('#logo').remove();
+    return renderPage(name);
+}
+
+function addWorker(name) {
+    return $('#worker').append('<script src="js/worker/'+ name +'.js" id="'+ name +'Worker"></script>');
 }
 
 function switchContent() {

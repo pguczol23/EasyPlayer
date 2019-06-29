@@ -78,6 +78,99 @@ b, strong
 			&:hover
 				background: rgba(0,0,0,.1)
 
+// [start LEFT NAV
+.overlay
+	&::-webkit-scrollbar
+		width: 6px
+	&::-webkit-scrollbar-thumb
+		background-color: lighten($color-icon, 10%)
+	width: 270px
+	position: fixed
+	z-index: 999
+	top: 30px
+	margin-top: 30px
+	//left: -270px
+	left: 0
+	height: calc(100% - 60px)
+	overflow-x: hidden
+	transition: 0.5s
+	background: $left-mav-bg
+	border-right: 2px solid rgba($color-icon, .2)
+	overflow-y: auto
+	.overlay-content
+		position: relative
+		width: 100%
+		text-align: center
+		.links-section
+			height: auto
+			border-bottom: 2px solid rgba($color-icon, .2)
+			padding: .8em 0
+			&:last-child
+				border-bottom: none
+			*::after
+				display: block
+				content: ""
+				clear: both
+			button
+				font-size: 16px !important
+				width: 6.7em
+				box-shadow: none
+				&::first-letter
+					text-transform: uppercase
+				svg
+					color: $color-icon2
+					font-size: 1em !important
+			.title
+				color: $color-icon2
+				width: auto
+				padding: .5em 0
+				margin-left: -4em
+				user-select: none
+			.items-container
+				width: 100%
+			.action
+				margin: .8em 0
+				button.btn
+					width: auto
+					color: $color-icon2
+					border-radius: 2em
+					border: $input-border-th solid $color-icon !important
+					&:hover
+						background: lighten($color-icon2,$active-proc) radial-gradient(circle, transparent 1%, lighten($color-icon2,$active-proc) 1%) center/15000%
+					&:active
+						background: lighten($color-icon2,$hover-proc)
+					&::first-letter
+						text-transform: uppercase
+					svg
+						color: $color-icon2
+						font-size: 1.6em !important
+			.link-row
+				width: 100%
+				padding: .2em 0
+				cursor: pointer
+				.link
+					width: 10.7em
+					vertical-align: middle
+					padding: .25em 0
+					color: $color-icon2
+					img
+						width: 2.2em
+						height: 2.2em
+						margin-right: 1.4em
+					svg
+						margin-right: 1.4em
+				&:hover
+					background: lighten($color-icon2,$active-proc) radial-gradient(circle, transparent 1%, lighten($color-icon2,$active-proc) 1%) center/15000%
+				&:active
+					background: lighten($color-icon2, $link-proc) !important
+			.link-row.active
+				background: lighten($color-icon2, $link-active-proc)
+				.link
+					color: $bg-second
+					svg
+						color: $bg-second
+// LEFT NAV end]
+
 .content
 	width: 100%
 	margin-top: 30px
@@ -98,7 +191,7 @@ b, strong
 				cursor: pointer
 				box-shadow: 0px 0px 0rem #000000
 				background: rgb(226,227,228)
-				border-radius: 1px
+				border-radius: .5rem
 				border: 0px solid #000000
 			&::-webkit-slider-thumb
 				border: 1px solid rgb(239,118,62)
@@ -119,14 +212,15 @@ b, strong
 				color: #fff
 				width: 3rem
 				height: 3rem
-				background: linear-gradient(45deg, rgb(239,118,62), rgb(238,153,48))
+				background: linear-gradient(45deg, rgb(239,118,62), rgb(255, 166, 50))
 				box-shadow: 0 0 .5rem .01rem  rgb(238,153,48)
 				border-radius: 3rem
 		.volume
 			.m-volume-cur
 				left: 0
 				height: 5px
-				background: linear-gradient(90deg, rgb(239,118,62), rgb(238,153,48))
+				background: linear-gradient(90deg, rgb(239,118,62), rgb(255, 165, 52))
+				border-radius: .5rem
 				pointer-events: none
 			margin: 0 .4rem
 			button.btn
@@ -146,9 +240,10 @@ b, strong
 			.time-line
 				.m-player-cur
 					height: 5px
-					background: linear-gradient(90deg, rgb(239,118,62), rgb(238,153,48))
+					background: linear-gradient(90deg, rgb(239,118,62), rgb(255, 164, 50))
 					left: 0
 					pointer-events: none
+					border-radius: .5rem
 @keyframes fadeOutOp
 	0%
 		opacity: 1
@@ -182,7 +277,7 @@ b, strong
 	margin-right: 5px
 
 .unset
-	display: none
+	display: none !important
 
 .logo
 	height: 127px

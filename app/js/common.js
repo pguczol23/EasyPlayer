@@ -1,10 +1,12 @@
 
+
 var _CONFIG_ = {
     appName: 'Easy Player',
     maximized: false,
     minimizeEnabled: true,
     maximizeEnabled: false,
     closeEnabled: true,
+    lisenList: {},
 
     setMinimizeEnabled: function (enabled) {
         this.minimizeEnabled = enabled;
@@ -51,7 +53,7 @@ function renderPage(name) {
 }
 
 function reRenderPage(name, target) {
-    $('#render').find('#logo').remove();
+    $(target).find(name).remove();
     return renderPage(name);
 }
 
@@ -59,8 +61,20 @@ function addWorker(name) {
     return $('#worker').append('<script src="js/worker/'+ name +'.js" id="'+ name +'Worker"></script>');
 }
 
-function switchContent() {
-    $('#root').css({'opacity':0}).html($('#current').html()).css({'opacity':1});
+function removeWorker(name) {
+    return $('#worker').find('#' + name + 'Worker').remove();
+}
+
+function reRunWorker(name) {
+    removeWorker(name);
+    addWorker(name);
+}
+
+function switchContent(target) {
+    $(target).toggleClass('unset');
+    $(target).toggleClass('d-flex');
+    $('#current').toggleClass('unset');
+    $('#current').toggleClass('d-flex');
 }
 
 function setTitle(title) {

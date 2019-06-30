@@ -2,15 +2,32 @@ class Directory {
     static Exists(path) {
         return require('fs').existsSync(path);
     }
-    static GetAllFiles(path, isFullPath) {
+    static GetAllFiles(path, pattern , isExtName, isFullPath) {
         const fs = require('fs');
         var files = [];
         fs.readdirSync(path).forEach(file => {
-            if (!Directory.isDirectory(path + '\\' + file)) {
-                if (isFullPath) {
-                    files.push(path + '\\' + file);
-                } else {
-                    files.push(file);
+            var fullFile = path + '\\' + file;
+            if (!this.isDirectory(fullFile)) {
+                if (pattern) {
+                    if (!Array.isArray(pattern)) pattern = [pattern];
+                    pattern.forEach( fileExtName => {
+                        if (File.GetExtName(fullFile) === fileExtName) {
+                            if (isExtName === false) {
+                                if (isFullPath) {
+                                    fullFile = path + '\\' +File.GetBaseName(fullFile, File.GetExtName(fullFile));
+                                    file = fullFile;
+                                }else {
+                                    fullFile = File.GetBaseName(fullFile, File.GetExtName(fullFile));
+                                    file = fullFile;
+                                }
+                            }
+                            if (isFullPath) {
+                                files.push(fullFile);
+                            } else {
+                                files.push(file);
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -20,9 +37,10 @@ class Directory {
         const fs = require('fs');
         var dirs = [];
         fs.readdirSync(path).forEach(dir => {
-            if (Directory.isDirectory(path + '\\' + dir)) {
+            var fullDir = path + '\\' + dir;
+            if (this.isDirectory(fullDir)) {
                 if (isFullPath) {
-                    dirs.push(path + '\\' + dir);
+                    dirs.push(fullDir);
                 } else {
                     dirs.push(dir);
                 }
@@ -31,7 +49,7 @@ class Directory {
         return dirs;
     }
     static isDirectory(path) {
-        if (Directory.Exists(path)) {
+        if (this.Exists(path)) {
             return require('fs').lstatSync(path).isDirectory();
         }
     }

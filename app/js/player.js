@@ -44,10 +44,10 @@ class Player  {
         this.params.hasTickEnable = true;
     }
 
-    restoreAudio() {
+    restoreAudio(hasPlay) {
         this.params.audio.currentTime = 0;
         this.params.hasTickEnable = true;
-        this.params.hasPlay = false;
+        this.params.hasPlay = hasPlay === true ? hasPlay : false;
         $(this.params.PlayBtn).html('<i class="' + this.params.iconPlay + '"></i>');
         this.playTick();
     }

@@ -1,5 +1,3 @@
-
-
 var _CONFIG_ = {
     appName: 'Easy Player',
     maximized: false,
@@ -107,16 +105,74 @@ function Minimize() {
     return require('electron').remote.getCurrentWindow().minimize();
 }
 
+function ToggleNav() {
+    var overlay = ".overlay";
+    if (!$(overlay).hasClass('active')) {
+        $(overlay).css({left: "0"}).addClass('active');
+        return;
+    }
+    $(overlay).css({left: '-' + $(overlay).css('width') }).removeClass('active');
+}
+
 $(function() {
     // Custom JS
 
     _CONFIG_.Inittialize();
 
-    var bgSrc = $("[data-bg-src]");
-    $.each(bgSrc, function (k,v) {
-        $(v).css({
-            backgroundImage: "url(" + $(v).attr("data-bg-src") + ")",
-            backgroundPosition: "center"
-        });
+    let win = require('electron').remote.getCurrentWindow();
+    win.center();
+    win.setResizable(true);
+    _CONFIG_.setMaximizeEnabled(true);
+
+    var player = new Player({
+        PlayBtn: '.play-btn',
+        PlayerClass: '.m-player',
+        volumeChanger: '.volume-input',
+        musicChanger: '.music-input',
+        muteChanger: '.mute-btn',
+        beforeTimeContainer: '.time-before',
+        afterTimeContainer: '.time-after',
+        iconPlay: 'fas fa-play',
+        iconPause: 'fas fa-pause',
+        iconVolumeFull: 'fal fa-volume-up',
+        iconVolumeMin: 'fal fa-volume-mute',
+        playedTimeClass: '.m-player-cur',
+        volumeTimeClass: '.m-volume-cur',
+        volumeHint: '',
+        playerTimeHint: ''
+    });
+
+    $('[data-action="toggleNav"]').on('click',() => {
+        ToggleNav();
+    });
+
+    $('[data-action="nav-click"]').on('click',function () {
+        var overlay = ".overlay";
+        $(overlay + " .active").removeClass('active');
+        $(this).addClass('active');
+    });
+
+    var files = Directory.GetAllFiles('F:\\Music', ['.mp3', '.ogg', '.wav'], false,false);
+    var files2 = Directory.GetAllFiles('F:\\Music', ['.mp3', '.ogg', '.wav'], true,true);
+    console.log(files);
+    console.log(files2);
+    files.forEach((v,k) => {
+        var title = v.length <= 35 ? v.toString() : v.toString().substring(0, 35);
+        var fullPath = files2[k];
+        $('.audio-list').append('' +
+            '<div class="d-flex flex-row audio-list-row justify-content-center align-items-center">' +
+            '<div class="audio-title" title="' + v +'">' + title +'</div>' +
+            '<div class="audio-created">' + File.GetCreatedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
+            '<div class="audio-modified">' + File.GetModifiedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
+            '<div class="audio-actions">' +
+            '<button class="btn" data-action="play-audio" data-audio-path="' + files2[k] + '"><i class="fas fa-play"></i></button>' +
+            '</div>' +
+            '</div>');
+    });
+
+    $('[data-action="play-audio"]').on('click', function (e) {
+        player.params.audio.src = $(this).attr('data-audio-path');
+        player.restoreAudio(true);
+        player.play();
     });
 });

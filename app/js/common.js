@@ -1,3 +1,8 @@
+
+String.prototype.replaceAll = function(search, replace){
+    return this.split(search).join(replace);
+}
+
 var _CONFIG_ = {
     appName: 'Easy Player',
     maximized: false,
@@ -152,27 +157,39 @@ $(function() {
         $(this).addClass('active');
     });
 
-    var files = Directory.GetAllFiles('F:\\Music', ['.mp3', '.ogg', '.wav'], false,false);
-    var files2 = Directory.GetAllFiles('F:\\Music', ['.mp3', '.ogg', '.wav'], true,true);
-    console.log(files);
-    console.log(files2);
-    files.forEach((v,k) => {
-        var title = v.length <= 35 ? v.toString() : v.toString().substring(0, 35);
-        var fullPath = files2[k];
-        $('.audio-list').append('' +
-            '<div class="d-flex flex-row audio-list-row justify-content-center align-items-center">' +
-            '<div class="audio-title" title="' + v +'">' + title +'</div>' +
-            '<div class="audio-created">' + File.GetCreatedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
-            '<div class="audio-modified">' + File.GetModifiedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
-            '<div class="audio-actions">' +
-            '<button class="btn" data-action="play-audio" data-audio-path="' + files2[k] + '"><i class="fas fa-play"></i></button>' +
-            '</div>' +
-            '</div>');
-    });
+    var Path = 'F:\\Music';
+    var files2 = Directory.GetAllFilesAsync(Path, ['.mp3', '.ogg', '.wav'], true,true);
 
-    $('[data-action="play-audio"]').on('click', function (e) {
-        player.params.audio.src = $(this).attr('data-audio-path');
-        player.restoreAudio(true);
-        player.play();
+    files2.then(val => {
+        var pl = [];
+        val.forEach((v,k) => {
+            var fullPath = v;
+            pl.push(fullPath);
+            v = v.replace(Path + '\\', '');
+            var title = v.length <= 35 ? v.toString() : v.toString().substring(0, 35);
+            $('.audio-list').append('' +
+                '<div class="d-flex flex-row audio-list-row justify-content-center align-items-center">' +
+                '<div class="audio-title" title="' + v +'">' + title +'</div>' +
+                '<div class="audio-created">' + File.GetCreatedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
+                '<div class="audio-modified">' + File.GetModifiedTime(fullPath).toLocaleString().replace(',','') +'</div>' +
+                '<div class="audio-actions">' +
+                '<button class="btn" data-action="play-audio" data-audio-path="' + fullPath + '"><i class="fas fa-play"></i></button>' +
+                '</div>' +
+                '</div>');
+        });
+        player.setPlayList(pl);
+        $('[data-action="play-audio"]').on('click', function (e) {
+            player.params.audio.src = $(this).attr('data-audio-path');
+            player.restoreAudio(true);
+            player.play();
+        });
+
+        $('[data-action="nextAudio"]').on('click', function (e) {
+            player.next();
+        });
+
+        $('[data-action="prevAudio"]').on('click', function (e) {
+            player.prev();
+        });
     });
 });

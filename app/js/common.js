@@ -1,4 +1,3 @@
-
 String.prototype.replaceAll = function(search, replace){
     return this.split(search).join(replace);
 }
@@ -184,12 +183,13 @@ $(function() {
             player.play();
         });
 
-        $('[data-action="nextAudio"]').on('click', function (e) {
-            player.next();
-        });
+    });
 
-        $('[data-action="prevAudio"]').on('click', function (e) {
-            player.prev();
-        });
+    $('[data-action="nextAudio"]').on('click', function (e) {
+        player.next();
+    });
+
+    $('[data-action="prevAudio"]').on('click', function (e) {
+        player.prev();
     });
 });

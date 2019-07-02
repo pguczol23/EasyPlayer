@@ -24,7 +24,6 @@ class Player  {
     }
 
     unmute() {
-        console.log(this.params.lastVolume);
         this.changeVolume(this.params.lastVolume);
         this.params.hasMute = false;
         $(this.params.muteChanger).html('<i class="' + this.params.iconVolumeFull + '"></i>');

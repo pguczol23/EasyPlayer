@@ -91,6 +91,56 @@ class Player  {
         this.changeTimers();
     }
 
+    setPlayList(playlist) {
+        this.params.playlist = playlist;
+    }
+
+    getPlayList() {
+        return this.params.playlist;
+    }
+
+    next() {
+        var pl = this.getPlayList();
+        var hasFind = false;
+        try {
+            pl.forEach( (v,k) => {
+                if (decodeURI(this.params.audio.src.replace('file:///','').replaceAll('/','\\')) === v) {
+                    if (pl[k+1] === undefined) {
+                        this.params.audio.src = pl[0];
+                    }else {
+                        this.params.audio.src = pl[k+1];
+                    }
+                    this.restoreAudio();
+                    this.play();
+                    hasFind = true;
+                    throw new Error('n');
+                }
+            });
+        }catch (e) {
+        }
+    }
+
+    prev() {
+        var pl = this.getPlayList();
+        var hasFind = false;
+        try {
+            pl.forEach( (v,k) => {
+                if (decodeURI(this.params.audio.src.replace('file:///','').replaceAll('/','\\')) === v) {
+                    if (pl[k-1] === undefined) {
+                        this.params.audio.src = pl[pl.length-1];
+                    }else {
+                        this.params.audio.src = pl[k-1];
+                    }
+                    this.restoreAudio();
+                    this.play();
+                    hasFind = true;
+                    throw new Error('n');
+                }
+            });
+        }catch (e) {
+        }
+    }
+
     Init() {
         this.params.audio = $(this.params.PlayerClass)[0];
         this.params.hasMute = false;

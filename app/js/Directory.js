@@ -11,7 +11,7 @@ class Directory {
                 if (pattern) {
                     if (!Array.isArray(pattern)) pattern = [pattern];
                     pattern.forEach( fileExtName => {
-                        if (File.GetExtName(fullFile) === fileExtName) {
+                        if (File.GetExtName(fullFile) === fileExtName || (fileExtName === undefined || fileExtName === '')) {
                             if (isExtName === false) {
                                 if (isFullPath) {
                                     fullFile = path + '\\' +File.GetBaseName(fullFile, File.GetExtName(fullFile));
@@ -33,6 +33,50 @@ class Directory {
         });
         return files;
     }
+    static async GetAllFilesAsync(path, pattern , isExtName, isFullPath) {
+        var fl = [];
+
+        const fs = require('fs');
+        const util = require('util');
+        const readdir = util.promisify(fs.readdir);
+
+        async function f() {
+            var files;
+            try {
+                files = await readdir(path);
+            } catch (e) {
+                console.log('e', e);
+            }
+            files.forEach(file => {
+                var fullFile = path + '\\' + file;
+                if (!Directory.isDirectory(fullFile)) {
+                    if (pattern) {
+                        if (!Array.isArray(pattern)) pattern = [pattern];
+                        pattern.forEach( fileExtName => {
+                            if (File.GetExtName(fullFile) === fileExtName || (fileExtName === undefined || fileExtName === '')) {
+                                if (isExtName === false) {
+                                    if (isFullPath) {
+                                        fullFile = path + '\\' +File.GetBaseName(fullFile, File.GetExtName(fullFile));
+                                        file = fullFile;
+                                    }else {
+                                        fullFile = File.GetBaseName(fullFile, File.GetExtName(fullFile));
+                                        file = fullFile;
+                                    }
+                                }
+                                if (isFullPath) {
+                                    fl.push(fullFile);
+                                } else {
+                                    fl.push(file);
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+        await f();
+        return fl;
+    }
     static GetAllDirectories(path, isFullPath) {
         const fs = require('fs');
         var dirs = [];
@@ -52,5 +96,8 @@ class Directory {
         if (this.Exists(path)) {
             return require('fs').lstatSync(path).isDirectory();
         }
+    }
+    static async isDirectoryAsync(path) {
+        return await require('fs').promises.lstat(path).then(stats => {return stats.isDirectory()}).catch(err => {return false});
     }
 }

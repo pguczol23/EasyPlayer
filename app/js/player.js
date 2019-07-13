@@ -5,6 +5,7 @@ class Player  {
     }
 
     play() {
+        if (this.params.audio.src === "" || this.params.audio.src === undefined) {this.setAudio(this.getPlayList()[0])}
         this.params.audio.play();
         this.params.hasPlay = true;
         $(this.params.PlayBtn).html('<i class="' + this.params.iconPause +'"></i>');
@@ -138,6 +139,10 @@ class Player  {
             });
         }catch (e) {
         }
+    }
+
+    setAudio(audio) {
+        this.params.audio.src = audio;
     }
 
     Init() {

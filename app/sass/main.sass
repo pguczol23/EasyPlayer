@@ -173,7 +173,7 @@ b, strong
 // LEFT NAV end]
 
 .content
-	width: 100%
+	width: calc(100% - 4px)
 	margin-top: 30px
 	height: calc(100vh - 30px - 67.5px)
 	overflow-y: auto
@@ -197,9 +197,9 @@ b, strong
 					color: lighten(rgb(239,118,62), 10%)
 	.player
 		padding: .6rem
-		width: 100%
-		bottom: 0
-		right: 0
+		width: calc(100% - 2px)
+		bottom: 1px
+		right: 1px
 		background: #fafafa
 		border-radius: .5rem
 		input
@@ -208,6 +208,8 @@ b, strong
 			width: 24rem
 			transition: 0.2s
 			border-radius: .5rem
+			background: transparent
+			padding: .3rem 0
 			&::-webkit-slider-runnable-track
 				width: 100%
 				height: 5px

@@ -16,6 +16,7 @@ function createWindow () {
         maximizable: false,
         minimizable: true,
         resizable: false,
+        nodeIntegration: true,
         title: "Easy Player",
         transparent: true,
         webPreferences: {

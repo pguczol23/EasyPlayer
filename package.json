@@ -29,6 +29,7 @@
     "electron": "^4.0.4",
     "electron-builder": "^20.38.5",
     "electron-packager": "^13.0.1",
+    "electron-rebuild": "^1.8.5",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^6.0.0",
     "gulp-clean-css": "^3.10.0",

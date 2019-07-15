@@ -8,10 +8,10 @@
     "compile": "babel-compile -p es2015 src:lib test:.test",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
-    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out",
-    "package-win-asar": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out ",
-    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out"
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=../out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=../out",
+    "package-win-asar": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --out=../out ",
+    "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=../out"
   },
   "keywords": [
     "db",

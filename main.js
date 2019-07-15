@@ -16,10 +16,11 @@ function createWindow () {
         maximizable: false,
         minimizable: true,
         resizable: false,
-        nodeIntegration: true,
         title: "Easy Player",
         transparent: true,
+        nodeIntegration: true,
         webPreferences: {
+            nodeIntegration: true,
             devTools: true
         }
     });

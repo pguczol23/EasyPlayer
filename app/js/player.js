@@ -39,6 +39,14 @@ class Player  {
         this.changeVolumeTime();
     }
 
+    hasPlayed() {
+        return !this.hasPaused();
+    }
+
+    hasPaused() {
+        return this.params.audio.paused;
+    }
+
     changeMusicTime(value) {
         this.params.audio.currentTime = value;
         this.params.hasTickEnable = true;

@@ -10,6 +10,7 @@
     "dist": "electron-builder",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/app-icon/mac/app.icns --osx-sign.identity='Developer ID Application: GitHub' --extend-info=assets/mac/info.plist",
     "package-win": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out",
+    "package-win-asar": "electron-packager . --overwrite --platform=win32 --arch=ia32 --out=out ",
     "package-linux": "electron-packager . --overwrite --platform=linux --arch=x64 --out=out"
   },
   "keywords": [
@@ -26,7 +27,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-cli": "^6.26.0",
     "browser-sync": "^2.26.0",
-    "electron": "^4.0.4",
+    "electron": "^4.2.6",
     "electron-builder": "^20.38.5",
     "electron-packager": "^13.0.1",
     "electron-rebuild": "^1.8.5",
@@ -42,13 +43,9 @@
     "gulp-util": "^3.0.8"
   },
   "dependencies": {
-    "@material-ui/core": "latest",
-    "gulp-babel": "^8.0.0",
-    "js-sha256": "^0.9.0",
-    "mysql": "^2.16.0",
-    "prop-types": "latest",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "electron-edge-js": "^12.0.1",
+    "jquery": "^3.4.1",
+    "prop-types": "latest"
   },
   "build": {
     "appId": "your.id",

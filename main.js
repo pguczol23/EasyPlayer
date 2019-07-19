@@ -6,10 +6,13 @@ function createWindow () {
 
     mainWindow = new BrowserWindow({
         width: 1280,
+        minWidth: 840,
         // width: 640,
         height: 720,
+        minHeight: 400,
         // height: 480,
         skipTaskbar: false,
+        useContentSize: true,
         center: true,
         frame: false,
         fullscreenable: true,
@@ -17,7 +20,7 @@ function createWindow () {
         minimizable: true,
         resizable: false,
         title: "Easy Player",
-        transparent: true,
+        transparent: false,
         nodeIntegration: true,
         webPreferences: {
             nodeIntegration: true,

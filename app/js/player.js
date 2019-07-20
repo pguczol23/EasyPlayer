@@ -81,8 +81,18 @@ class Player  {
 
     changePlayerTime(val) {
         $(this.params.playedTimeClass).css({
-            width: Math.round(((val >= 0 ? val : this.params.audio.currentTime)/this.params.audio.duration ) * $(this.params.musicChanger).width()) + 'px'
+            width: this.getWidth(this.params.musicChanger, val)
         });
+    }
+
+    changePlayerTimeBg() {
+        $(this.params.playedTimeClass + '-bg').css({
+            width: this.getWidth(this.params.musicChanger)
+        });
+    }
+
+    getWidth(el, val) {
+        return Math.round(((val >= 0 ? val : this.params.audio.currentTime)/this.params.audio.duration ) * $(el).width()) + 'px';
     }
 
     changeVolumeTime(val) {
@@ -96,6 +106,7 @@ class Player  {
             $(this.params.musicChanger).val(this.params.audio.currentTime);
             this.changePlayerTime();
         }
+        this.changePlayerTimeBg();
         this.changeTimers();
     }
 
@@ -107,6 +118,25 @@ class Player  {
         return this.params.playlist;
     }
 
+    setAudioTitle(str) {
+        $(this.params.audioTitle).text(this.getShortName(str, 50));
+        $(this.params.audioTitle).attr('title', str);
+    }
+
+    getAudioTitle() {
+        return $(this.params.audioTitle).text();
+    }
+
+    getShortName(name, len) {
+       return name.length <= len ? name.toString() : name.toString().substring(0, len) + '...';
+    }
+
+    getAudioTitleFromSrc() {
+        let name = decodeURI(this.params.audio.src.replace('file:///',''));
+        let lastPos = name.lastIndexOf('/') >= 0 ? name.lastIndexOf('/') : -1;
+        return name.substr(lastPos + 1, name.length);
+    }
+
     next() {
         var pl = this.getPlayList();
         var hasFind = false;
@@ -115,8 +145,10 @@ class Player  {
                 if (decodeURI(this.params.audio.src.replace('file:///','').replaceAll('/','\\')) === v) {
                     if (pl[k+1] === undefined) {
                         this.params.audio.src = pl[0];
+                        this.setAudioTitle(this.getAudioTitleFromSrc());
                     }else {
                         this.params.audio.src = pl[k+1];
+                        this.setAudioTitle(this.getAudioTitleFromSrc());
                     }
                     this.restoreAudio();
                     this.play();
@@ -151,6 +183,7 @@ class Player  {
 
     setAudio(audio) {
         this.params.audio.src = audio;
+        this.setAudioTitle(this.getAudioTitleFromSrc());
     }
 
     Init() {
@@ -177,6 +210,7 @@ class Player  {
         });
         $(this.params.audio).on('ended', () => {
             this.restoreAudio();
+            this.next();
         });
         $(this.params.volumeChanger).on('change', () => {
             this.changeVolume($(this.params.volumeChanger).val());

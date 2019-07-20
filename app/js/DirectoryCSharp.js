@@ -4,8 +4,8 @@ class Directory {
         this.Dir({task:'exists', path: path}, (error, result) => {this.res=result});
         return this.res;
     }
-    static GetAllFiles(path, pattern, isFullPath=true) {
-        this.Dir({task:'getAllFiles', path: path, pattern: pattern, isFullPath: isFullPath}, (error, result) => {this.res=result});
+    static GetAllFiles(path, pattern, isFullPath=true, isExt=true, asThirdArray=false) {
+        this.Dir({task:'getAllFiles', path: path, pattern: pattern, isFullPath: isFullPath, isExt: isExt, asThirdArray: asThirdArray}, (error, result) => {this.res=result});
         return this.res;
     }
     static GetAllDirectories(path, isFullPath=true) {

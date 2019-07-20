@@ -161,16 +161,23 @@
 				<button class="btn next-btn" data-action="nextAudio"><i class="fal fa-step-forward"></i></button>
 			</div>
 			<div class="time d-flex justify-content-center">
-				<div class="time-before">
+				<div class="time-before d-flex flex-column justify-content-center">
 					0:00
 					</div>
-				<div class="time-line d-flex flex-column justify-content-center align-items-center position-relative">
-					<div class="m-player-cur position-absolute"></div>
-					<input class="music-input" type="range" value="0" step="0.1" min="0">
-					<div class="m-player-back position-absolute"></div>
-					<audio draggable="false" class="unset m-player"></audio>
+				<div class="time-line d-flex flex-column justify-content-around">
+					<div class="current-audio">
+						<div class="audio-title">&nbsp;</div>
+					</div>
+					<div class="d-flex flex-column justify-content-center align-items-center position-relative">
+						<div class="m-player-cur position-absolute"></div>
+						<div class="m-player-cur-bg position-absolute"></div>
+						<div class="m-player-cur-hint position-absolute"></div>
+						<input class="music-input" type="range" value="0" step="0.1" min="0">
+						<div class="m-player-back position-absolute"></div>
+						<audio draggable="false" class="unset m-player"></audio>
+					</div>
 				</div>
-				<div class="time-after">
+				<div class="time-after d-flex flex-column justify-content-center">
 					0:00
 					</div>
 				</div>

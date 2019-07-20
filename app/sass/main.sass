@@ -178,10 +178,13 @@ b, strong
 	margin-right: 1px
 	height: calc(100vh - 30px - 67.5px)
 	overflow-y: auto
-	background: darken(rgb(244,248,249), 20%)
+	//background: darken(rgb(244,248,249), 20%)
+	background: rgb(255,255,255)
 	.audio-list
+		&-row.active
+			background: darken(rgb(242,244,246), 5%)
 		&-row
-			background: #fff
+			background: rgb(242,244,246)
 			padding: .25rem .75rem
 			margin: .25rem 0
 			border-radius: 1.5rem
@@ -201,12 +204,13 @@ b, strong
 				svg
 					color: lighten(rgb(239,118,62), 10%)
 	.player
-		padding: .6rem
+		padding: 1rem .6rem
 		width: calc(100% - 2px)
 		bottom: 1px
 		right: 1px
-		background: #fafafa
+		background: rgb(249,250,251)
 		border-radius: .5rem
+		border-top: .1rem solid rgba(242,243,244, 1)
 		input
 			-webkit-appearance: none
 			outline: none
@@ -258,7 +262,7 @@ b, strong
 				@extend .m-volume-cur
 				background: rgb(226,227,228)
 				width: 100%
-				z-index: 5
+				z-index: 4
 			margin: 0 .4rem
 			button.btn
 				padding: .4rem .8rem
@@ -275,6 +279,11 @@ b, strong
 			.time-after
 				margin-left: .5rem
 			.time-line
+				padding: 0 .4rem
+				margin-bottom: .5rem
+				.current-audio
+					.audio-title
+						font-size: .9em
 				.m-player-cur
 					height: 5px
 					background: linear-gradient(90deg, rgb(239,118,62), rgb(255, 164, 50))
@@ -286,6 +295,10 @@ b, strong
 					@extend .m-player-cur
 					background: rgb(226,227,228)
 					width: 100%
+					z-index: 4
+				.m-player-cur-bg
+					@extend .m-player-cur
+					background: darken(rgb(226,227,228), 10%)
 					z-index: 5
 @keyframes fadeOutOp
 	0%

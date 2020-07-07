@@ -28,7 +28,7 @@
     "babel-cli": "^6.26.0",
     "browser-sync": "^2.26.7",
     "del": "^5.0.0",
-    "electron": "^4.2.6",
+    "electron": "^9.1.0",
     "electron-builder": "^20.38.5",
     "electron-packager": "^13.0.1",
     "electron-rebuild": "^1.8.5",
